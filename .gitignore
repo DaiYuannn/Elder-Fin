@@ -4,3 +4,15 @@ dist
 .env
 .env.*
 !.env.example
+.vscode/
+.idea/
+*.log
+*.tmp
+*.temp
+coverage/
+.cache/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
