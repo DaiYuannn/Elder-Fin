@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=../index.html#/biz" />
+  <title>正在跳转到 React 联合干预中枢</title>
+</head>
+<body>
+  <script>
+    window.location.replace('../index.html#/biz');
+  </script>
+</body>
+</html>
+                </div>
+              </div>
+              <div class="risk-detail-block">
+                <h3>当前判断</h3>
+                <p id="risk-detail-desc">检测到老人账户尝试向异地可疑账户转账，命中高危关键词与账户黑名单规则。</p>
+              </div>
+              <div class="risk-detail-actions">
+                <button class="btn btn-danger btn-sm" type="button">强制干预</button>
+                <button class="btn btn-outline btn-sm" type="button">加入地图监视</button>
+              </div>
+              <div class="province-drill-panel">
+                <div class="panel-heading-row panel-heading-row-tight">
+                  <h3 style="margin: 0; font-size: 1rem;">省份钻取</h3>
+                  <span class="badge badge-primary" id="province-drill-badge">全国视角</span>
+                </div>
+                <div class="summary-list province-drill-summary">
+                  <div class="summary-item">
+                    <span>当前省份</span>
+                    <strong id="province-drill-name">全国</strong>
+                  </div>
+                  <div class="summary-item">
+                    <span>可见链路</span>
+                    <strong id="province-drill-count">--</strong>
+                  </div>
+                  <div class="summary-item">
+                    <span>风险热度</span>
+                    <strong id="province-drill-heat">--</strong>
+                  </div>
+                  <div class="summary-item">
+                    <span>主导来源</span>
+                    <strong id="province-drill-source">--</strong>
+                  </div>
+                  <div class="summary-item">
+                    <span>30 分钟趋势</span>
+                    <strong id="province-drill-trend">--</strong>
+                  </div>
+                </div>
+                <div class="risk-detail-block province-drill-copy">
+                  <h3>钻取结论</h3>
+                  <p id="province-drill-desc">当前为全国视角，点击省域块后可查看该区域链路密度、来源结构和处置建议。</p>
+                </div>
+                <div class="province-drill-actions">
+                  <button class="btn btn-outline btn-sm" id="province-drill-reset" type="button">返回全国</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="card map-event-stream-panel">
+          <div class="table-panel-head">
+            <h2 style="margin: 0; font-size: 1.15rem;">底部事件流</h2>
+            <span class="badge badge-warning">地图联动</span>
+          </div>
+          <div class="map-event-stream" id="map-event-stream"></div>
+        </section>
+
+        <div class="flow-main-grid">
+          <section class="card flow-panel">
+            <div class="panel-heading-row">
+              <h2 style="margin: 0; font-size: 1.2rem;">风险来源总览</h2>
+              <span class="badge badge-danger">重点盯防</span>
+            </div>
+            <div class="source-grid">
+              <div class="source-card source-card-danger">
+                <span>短信诱导</span>
+                <strong id="source-sms">--</strong>
+                <p>公检法、验证码、安全账户等高危话术</p>
+              </div>
+              <div class="source-card source-card-warning">
+                <span>高收益理财</span>
+                <strong id="source-finance">--</strong>
+                <p>保本高息、养老投资、伪金融产品</p>
+              </div>
+              <div class="source-card">
+                <span>异常转账</span>
+                <strong id="source-transfer">--</strong>
+                <p>连续转账、异地账户、夜间资金外流</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card flow-panel">
+            <div class="panel-heading-row">
+              <h2 style="margin: 0; font-size: 1.2rem;">处置优先级队列</h2>
+              <span class="badge badge-warning">实时排序</span>
+            </div>
+            <div class="priority-list" id="biz-priority-list"></div>
+          </section>
+        </div>
+
+        <div class="flow-secondary-grid">
+          <section class="card" style="padding: 0; overflow: hidden;">
+            <div class="table-panel-head">
+              <h2 style="margin: 0; font-size: 1.15rem;">监测流明细</h2>
+              <span class="badge badge-primary">机构内部视角</span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>事件编号</th>
+                  <th>来源类型</th>
+                  <th>涉及金额</th>
+                  <th>当前状态</th>
+                  <th>建议动作</th>
+                </tr>
+              </thead>
+              <tbody id="biz-risk-table-body"></tbody>
+            </table>
+          </section>
+
+          <section class="card flow-side-panel">
+            <div class="panel-heading-row">
+              <h2 style="margin: 0; font-size: 1.15rem;">值班席位提醒</h2>
+              <span class="badge badge-success">已同步</span>
+            </div>
+            <div class="duty-note-list">
+              <div class="duty-note">
+                <strong>值班建议 01</strong>
+                <p>先处理涉及真实资金外流的警情，再核验营销诱导和产品异常。</p>
+              </div>
+              <div class="duty-note">
+                <strong>值班建议 02</strong>
+                <p>已同步家属但仍未回执的事件，需在 10 分钟内发起二次电话提醒。</p>
+              </div>
+              <div class="duty-note">
+                <strong>值班建议 03</strong>
+                <p>后续地图态势会优先接入该页，展示资金流向与地区分布。</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>
