@@ -1,6 +1,7 @@
 import { Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 
+import robotImage from '../robot.png';
 import { useAppStore } from './store/appStore';
 import {
   ensureSeedAlerts,
@@ -31,6 +32,23 @@ const ROLE_NAV_LINKS = {
 };
 
 const PUBLIC_HOME_LINKS = [];
+
+const DIALECT_OPTIONS = [
+  '普通话',
+  '北京话',
+  '上海话',
+  '粤语',
+  '天津话',
+  '四川话',
+  '重庆话',
+  '武汉话',
+  '闽南话',
+  '客家话',
+  '苏州话',
+  '东北话'
+];
+
+const ELDER_COMPANION_MESSAGE = '今天是3月10日，普陀区的温度为13~6℃，天气晴朗，可以去公园走走散心哦。';
 
 const HOME_EXPERIENCES = {
   guest: {
@@ -584,6 +602,19 @@ function ElderHomeView() {
         </div>
       </section>
 
+      <section className="card elder-companion-card">
+        <div className="elder-companion-media">
+          <img src={robotImage} alt="陪伴机器人" className="elder-companion-image" />
+        </div>
+        <div className="elder-companion-content">
+          <p className="eyebrow">情感陪伴助手</p>
+          <h2>今天想和我聊聊什么呢</h2>
+          <div className="elder-companion-bubble">
+            <p>{ELDER_COMPANION_MESSAGE}</p>
+          </div>
+        </div>
+      </section>
+
       <section className="grid-3 elder-sim-grid">
         <article className="card elder-today-card">
           <h2>今日风险走势</h2>
@@ -706,6 +737,7 @@ function DetectView() {
   const alerts = useAppStore((state) => state.alerts).slice(0, 4);
   const contacts = useAppStore((state) => state.contacts);
   const [input, setInput] = useState('');
+  const [dialect, setDialect] = useState(DIALECT_OPTIONS[0]);
   const [result, setResult] = useState(null);
   const highRiskCount = alerts.filter((item) => item.level === 'high').length;
 
@@ -731,7 +763,42 @@ function DetectView() {
         <p>输入短信、电话话术、理财宣传语或合同片段，系统将给出基础风险评级。</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="risk-text">检测内容</label>
-          <textarea className="detect-textarea" id="risk-text" value={input} onChange={(event) => setInput(event.target.value)} placeholder="例如：我是某平台客服，您的账户异常，请立刻转账到安全账户并提供验证码..." />
+          <div className="detect-input-row">
+            <input
+              className="detect-text-input"
+              id="risk-text"
+              type="text"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="直接输入需要识别的话术或宣传内容"
+            />
+            <div className="detect-voice-group" aria-label="方言语音识别入口">
+              <button className="detect-tool-button detect-voice-button" type="button" aria-label={`语音识别，当前方言${dialect}`}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5V7a3.5 3.5 0 1 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Zm6-3.5a1 1 0 1 0-2 0 4 4 0 1 1-8 0 1 1 0 1 0-2 0 6 6 0 0 0 5 5.91V21H9.5a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H13v-3.09A6 6 0 0 0 18 12Z" />
+                </svg>
+                <span className="detect-voice-copy">
+                  <strong>语音</strong>
+                  <small>方言识别</small>
+                </span>
+              </button>
+              <div className="detect-dialect-shell">
+                <select className="detect-dialect-select" value={dialect} onChange={(event) => setDialect(event.target.value)} aria-label="选择识别方言">
+                  {DIALECT_OPTIONS.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+                <span className="detect-dialect-arrow" aria-hidden="true">▾</span>
+              </div>
+            </div>
+            <label className="detect-tool-button detect-upload-button" htmlFor="risk-image-upload">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 4a2 2 0 0 0-1.8 1.1L6.7 6H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-1.7l-.5-.9A2 2 0 0 0 15 4H9Zm3 13.5A4.5 4.5 0 1 1 12 8a4.5 4.5 0 0 1 0 9Zm0-2A2.5 2.5 0 1 0 12 10a2.5 2.5 0 0 0 0 5Z" />
+              </svg>
+              <span>图片/相机</span>
+            </label>
+            <input id="risk-image-upload" className="detect-hidden-input" type="file" accept="image/*" capture="environment" />
+          </div>
           <div className="form-actions-row detect-actions-row">
             <button className="btn primary detect-action-btn" type="submit">开始检测</button>
             <button className="btn detect-action-btn" type="button" onClick={() => navigate('/elder/family')}>去设置家属提醒</button>
